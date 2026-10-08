@@ -10,8 +10,8 @@ from PIL import Image
 
 ASSETS_DIR = Path("assets")
 THUMBS_DIR = ASSETS_DIR / "thumbs"
-TARGET_WIDTH = 400
-JPEG_QUALITY = 70
+TARGET_WIDTH = 1000
+JPEG_QUALITY = 85
 
 # Subdirectories to process
 SUBDIRS = ["photographs", "poster-designs", "ui-ux", "photo-animation"]
