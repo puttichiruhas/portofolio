@@ -224,8 +224,24 @@ function initMobileMenu() {
    ========================================================================= */
 
 /**
+ * Returns the thumbnail path for a given full-resolution asset path.
+ * Thumbnails live in assets/thumbs/<subfolder>/<filename>.jpg
+ * Videos get a static SVG placeholder instead.
+ */
+function getThumbPath(src) {
+    if (src.endsWith('.mp4')) return null; // videos handled separately
+    // e.g. ./assets/photographs/IMG_123.jpg  →  ./assets/thumbs/photographs/IMG_123.jpg
+    // e.g. ./assets/ui-ux/1.png             →  ./assets/thumbs/ui-ux/1.jpg
+    const parts = src.replace('./assets/', '').split('/');
+    const folder = parts[0];
+    const filename = parts[1];
+    const thumbName = filename.replace(/\.(png|jpeg)$/i, '.jpg');
+    return `./assets/thumbs/${folder}/${thumbName}`;
+}
+
+/**
  * Renders every asset in portfolioData as a card inside #portfolio-grid.
- * Videos get a play-button overlay; images use lazy loading.
+ * Uses compressed thumbnails for the grid, full-res only in lightbox.
  */
 function renderPortfolioGrid() {
     const grid = document.getElementById('portfolio-grid');
@@ -234,16 +250,19 @@ function renderPortfolioGrid() {
     grid.innerHTML = portfolioData.map((item, idx) => {
         const isVideo = item.src.endsWith('.mp4');
         const escapedTitle = item.title.replace(/'/g, "\\'").replace(/&/g, '&amp;');
+        const thumbSrc = getThumbPath(item.src);
 
-        // For video thumbnails, we'll use a play-icon SVG overlay
+        // For video thumbnails, use a stylish SVG poster (no video download!)
         const mediaHtml = isVideo
-            ? `<video src="${item.src}" muted preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
-               <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                   <div class="w-14 h-14 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                       <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+            ? `<div class="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] flex items-center justify-center">
+                   <div class="text-center">
+                       <div class="w-16 h-16 rounded-full bg-[var(--accent)]/20 backdrop-blur-sm flex items-center justify-center border border-[var(--accent)]/40 mx-auto mb-3">
+                           <svg class="w-7 h-7 text-[var(--accent)] ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+                       </div>
+                       <span class="text-xs text-[var(--text-muted)] font-medium">Click to Play</span>
                    </div>
                </div>`
-            : `<img src="${item.src}" alt="${item.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
+            : `<img src="${thumbSrc}" alt="${item.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
 
         return `
             <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="${item.category}" onclick="openModal('${escapedTitle}', '${item.label}', '${item.src}')">
