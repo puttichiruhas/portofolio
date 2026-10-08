@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Putti Chiruhas | Engineer, Designer & Visual Strategist</title>
+    <meta name="description" content="Portfolio of Putti Chiruhas - Mechanical Engineering student at IIT Dharwad, UI/UX designer, photographer, and video producer.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Modular Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased selection:bg-[var(--accent)] selection:text-[var(--bg-canvas)]">
+
+    <!-- =========================================================================
+         1. Interactive Cursor Followers
+         ========================================================================= -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- =========================================================================
+         2. Sticky Navigation Bar & Mobile Drawer
+         ========================================================================= -->
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-[var(--bg-canvas)]/80 border-b border-[var(--border-color)] transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="group flex items-center gap-2">
+                <div class="w-10 h-10 rounded-xl bg-[var(--accent)] text-[var(--bg-canvas)] font-bold flex items-center justify-center text-xl heading-font group-hover:rotate-6 transition-transform">
+                    PC
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold tracking-tight text-lg leading-none heading-font">CHIRUHAS</span>
+                    <span class="text-[10px] tracking-widest text-[var(--accent)] uppercase font-semibold">IIT Dharwad</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#about" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">About</a>
+                <a href="#skills" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Skills</a>
+                <a href="#experience" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Projects & Leadership</a>
+                <a href="#portfolio" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Portfolio</a>
+                <a href="#contact" class="text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions & Theme Toggle -->
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2.5 rounded-xl glass-card text-[var(--text-main)] hover:text-[var(--accent)] transition-colors focus:outline-none" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--accent)] text-[var(--bg-canvas)] font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-[var(--glow-color)]">
+                    <span>Let's Talk</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+
+                <!-- Mobile Menu Hamburger Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl glass-card text-[var(--text-main)]" aria-label="Open Mobile Menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-[var(--border-color)] bg-[var(--bg-canvas)] px-6 py-6 flex flex-col gap-4">
+            <a href="#about" class="text-base font-medium text-[var(--text-muted)] hover:text-[var(--accent)] py-2 border-b border-[var(--border-color)]/40">About</a>
+            <a href="#skills" class="text-base font-medium text-[var(--text-muted)] hover:text-[var(--accent)] py-2 border-b border-[var(--border-color)]/40">Skills</a>
+            <a href="#experience" class="text-base font-medium text-[var(--text-muted)] hover:text-[var(--accent)] py-2 border-b border-[var(--border-color)]/40">Projects & Leadership</a>
+            <a href="#portfolio" class="text-base font-medium text-[var(--text-muted)] hover:text-[var(--accent)] py-2 border-b border-[var(--border-color)]/40">Portfolio</a>
+            <a href="#contact" class="text-base font-medium text-[var(--text-muted)] hover:text-[var(--accent)] py-2">Contact</a>
+        </div>
+    </header>
+
+    <!-- =========================================================================
+         3. Hero Section
+         ========================================================================= -->
+    <section id="hero" class="min-h-screen pt-32 pb-20 flex items-center relative overflow-hidden">
+        <!-- Ambient Background Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[var(--accent)]/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Introduction (Left) -->
+                <div class="lg:col-span-8 flex flex-col items-start">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card glass-gloss text-xs font-semibold text-[var(--accent)] mb-6">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span>Open for Creative Projects & Collaborations</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 heading-font">
+                        <span class="accent-gradient-text">PUTTI CHIRUHAS</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-[var(--text-muted)] font-normal mb-8 max-w-2xl leading-relaxed">
+                        Mechanical Engineering student at <span class="text-[var(--accent)] font-semibold">IIT Dharwad</span>, UI/UX designer, photographer, and video producer driven by tech & entrepreneurship.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+                        <a href="#portfolio" class="w-full sm:w-auto text-center px-8 py-4 rounded-xl bg-[var(--accent)] text-[var(--bg-canvas)] font-bold text-base hover:shadow-xl hover:shadow-[var(--glow-color)] hover:-translate-y-0.5 transition-all shadow-lg shadow-[var(--glow-color)]">
+                            Explore Works
+                        </a>
+                        <a href="#about" class="w-full sm:w-auto text-center px-8 py-4 rounded-xl glass-card glass-gloss text-[var(--text-main)] font-semibold text-base hover:border-[var(--accent)] transition-all">
+                            About My Journey
+                        </a>
+                    </div>
+
+                    <!-- Quick Highlight Metric Cards -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-12 pt-12 border-t border-[var(--border-color)] w-full">
+                        <div>
+                            <div class="text-3xl font-extrabold heading-font text-[var(--accent)]">IIT Dharwad</div>
+                            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">B.Tech Mechanical ('28)</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold heading-font text-[var(--text-main)]">6+ Media</div>
+                            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">Design & Production</div>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <div class="text-3xl font-extrabold heading-font text-[var(--accent)]">Strategy</div>
+                            <div class="text-xs text-[var(--text-muted)] font-medium mt-1">Pattern Analysis & Media</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Profile Highlights (Right) -->
+                <div class="lg:col-span-4 w-full">
+                    <div class="glass-card p-6 rounded-3xl relative glow-effect glass-gloss">
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)]/80 border border-[var(--border-color)]">
+                                <span class="text-xs font-bold tracking-wider text-[var(--accent)] uppercase">Education</span>
+                                <p class="text-base font-bold text-[var(--text-main)] mt-1">IIT Dharwad</p>
+                                <p class="text-xs text-[var(--text-muted)]">B.Tech Mechanical ('28)</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)]/80 border border-[var(--border-color)]">
+                                <span class="text-xs font-bold tracking-wider text-[var(--accent)] uppercase">Specialization</span>
+                                <p class="text-base font-bold text-[var(--text-main)] mt-1">UI/UX & Multimedia</p>
+                                <p class="text-xs text-[var(--text-muted)]">Digital Product & Motion Design</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)]/80 border border-[var(--border-color)]">
+                                <span class="text-xs font-bold tracking-wider text-[var(--accent)] uppercase">Leadership</span>
+                                <p class="text-base font-bold text-[var(--text-main)] mt-1">SDS Club Manager</p>
+                                <p class="text-xs text-[var(--text-muted)]">Social Media & Visual Strategy</p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)]/80 border border-[var(--border-color)]">
+                                <span class="text-xs font-bold tracking-wider text-[var(--accent)] uppercase">Video & Pattern Analysis</span>
+                                <p class="text-base font-bold text-[var(--text-main)] mt-1">Video & Pattern Analysis</p>
+                                <p class="text-xs text-[var(--text-muted)]">Content Dynamics & Visual Trends</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         4. About Me Section
+         ========================================================================= -->
+    <section id="about" class="py-24 border-t border-[var(--border-color)] relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="mb-16">
+                <span class="text-xs font-bold tracking-widest text-[var(--accent)] uppercase">Context & Vision</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight heading-font mt-2">About Me</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Bio & Strategy -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="glass-card p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-4 heading-font text-[var(--accent)] flex items-center gap-2">
+                            <i data-lucide="user" class="w-5 h-5"></i>
+                            Professional Summary
+                        </h3>
+                        <p class="text-[var(--text-muted)] leading-relaxed mb-4">
+                            I am a highly adaptable problem-solver bridging the gap between technical engineering, visual storytelling, and financial strategy. Currently pursuing Mechanical Engineering at <strong class="text-[var(--text-main)]">IIT Dharwad</strong>, I am actively open for creative assignments specializing in UI/UX, photography, and video production.
+                        </p>
+                        <p class="text-[var(--text-muted)] leading-relaxed">
+                            Driven by a pragmatic approach to career building, I leverage creative and technical skills to build capital with the ultimate vision of scaling in <strong class="text-[var(--text-main)]">Tech & Entrepreneurship</strong>. As a natural leader and strong communicator, I thrive in dynamic environments where I can build, design, and strategize.
+                        </p>
+                    </div>
+
+                    <!-- Future Vision Cards -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-4 heading-font text-[var(--accent)] flex items-center gap-2">
+                            <i data-lucide="compass" class="w-5 h-5"></i>
+                            Future Vision & Career Strategy
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)]">
+                                <h4 class="font-bold text-sm text-[var(--text-main)] mb-2 flex items-center gap-2">
+                                    <i data-lucide="video" class="w-4 h-4 text-[var(--accent)]"></i>
+                                    Creative Production & Strategy
+                                </h4>
+                                <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                                    Scaling high-quality digital content by merging aesthetic multimedia production with data-driven audience strategies.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-[var(--bg-canvas)] border border-[var(--border-color)]">
+                                <h4 class="font-bold text-sm text-[var(--text-main)] mb-2 flex items-center gap-2">
+                                    <i data-lucide="cpu" class="w-4 h-4 text-[var(--accent)]"></i>
+                                    Tech & Product Communication
+                                </h4>
+                                <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                                    Leveraging engineering rigor and UI/UX expertise to break down complex physical and digital products into accessible visual stories.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline & Education -->
+                <div class="lg:col-span-5 space-y-8">
+                    <!-- Education Card -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-6 heading-font text-[var(--accent)] flex items-center gap-2">
+                            <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                            Education & Degree
+                        </h3>
+                        <div class="border-l-2 border-[var(--accent)] pl-6 relative space-y-1">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[var(--accent)]"></div>
+                            <span class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">2024 - 2028 (Expected)</span>
+                            <h4 class="text-lg font-bold text-[var(--text-main)]">B.Tech in Mechanical Engineering</h4>
+                            <p class="text-sm font-semibold text-[var(--text-muted)]">Indian Institute of Technology (IIT) Dharwad</p>
+                        </div>
+                    </div>
+
+                    <!-- Personal Interests & Unwinding -->
+                    <div class="glass-card p-8 rounded-2xl">
+                        <h3 class="text-xl font-bold mb-4 heading-font text-[var(--accent)] flex items-center gap-2">
+                            <i data-lucide="gamepad-2" class="w-5 h-5"></i>
+                            Personal Interests & Unwinding
+                        </h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-4">
+                            When not studying or designing, I actively research the tech market (specifically smartphones), analyze video pattern dynamics, and study global financial markets with active stock investments.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] text-xs font-medium">Smartphone Tech</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] text-xs font-medium">Stock Analysis</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] text-xs font-medium">Gaming</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] text-xs font-medium">Storytelling</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-[var(--bg-canvas)] border border-[var(--border-color)] text-xs font-medium">Music</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         5. Skills & Tools Section
+         ========================================================================= -->
+    <section id="skills" class="py-24 border-t border-[var(--border-color)] bg-[var(--bg-card)]/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-xs font-bold tracking-widest text-[var(--accent)] uppercase">Capabilities</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight heading-font mt-2">Core Skills & Tools</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Skill Category 1 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Creative & Design</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> UI/UX Design</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Poster & Layout Design</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Photography & Videography</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Ad & Photo Animation</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Art & Multimedia</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 2 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+                        <i data-lucide="wrench" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Technical Tools</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Figma</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Canva</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> SolidWorks (3D CAD)</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> CapCut & Editing Suits</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Generative AI Tools</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 3 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Financial Strategy</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Stock Market Research</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Equity Analysis</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Fund Management</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Budget Allocation</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Category 4 -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3">Leadership & Soft Skills</h3>
+                    <ul class="space-y-2 text-sm text-[var(--text-muted)]">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Natural Leadership</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Clear & Effective Communication</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Strategic Adaptability</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span> Resilient Problem Solving</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         6. Projects & Leadership Section
+         ========================================================================= -->
+    <section id="experience" class="py-24 border-t border-[var(--border-color)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-xs font-bold tracking-widest text-[var(--accent)] uppercase">Proven Execution</span>
+                <h2 class="text-3xl sm:text-5xl font-bold tracking-tight heading-font mt-2">Key Projects & Roles</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project Highlight 1 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider mb-2">Event Branding & Campaign</div>
+                        <h3 class="text-xl font-bold mb-3 heading-font">University Flagship Events</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                            Spearheaded visual identity, poster designs, and promotion for major university events including <strong class="text-[var(--text-main)]">GENESIS</strong>, <strong class="text-[var(--text-main)]">HARSHATAL</strong>, <strong class="text-[var(--text-main)]">RANG-E-RAAS</strong>, and <strong class="text-[var(--text-main)]">PARSEC</strong>. Served as Social Media Manager for <strong class="text-[var(--accent)]">SDS CLUB</strong>.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2 text-xs font-semibold text-[var(--accent)]">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        <span>High Audience Engagement</span>
+                    </div>
+                </div>
+
+                <!-- Project Highlight 2 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider mb-2">Motion Design & Ad Animation</div>
+                        <h3 class="text-xl font-bold mb-3 heading-font">FROOTI Product Ad Concept</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                            Self-directed and produced a dynamic AD animation concept for FROOTI, demonstrating motion graphics, visual pacing, and high-impact commercial video editing skills.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2 text-xs font-semibold text-[var(--accent)]">
+                        <i data-lucide="clapperboard" class="w-4 h-4"></i>
+                        <span>Motion & Video Production</span>
+                    </div>
+                </div>
+
+                <!-- Project Highlight 3 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider mb-2">Engineering + Digital UI</div>
+                        <h3 class="text-xl font-bold mb-3 heading-font">Mechanical & Digital Integration</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                            Proficient in translating complex 3D CAD mechanical concepts (SolidWorks) into intuitive digital interfaces and user-centric visual formats with industrial rigor.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-[var(--border-color)] flex items-center gap-2 text-xs font-semibold text-[var(--accent)]">
+                        <i data-lucide="layers" class="w-4 h-4"></i>
+                        <span>CAD & UI Convergence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         7. Portfolio Showcase Section
+         ========================================================================= -->
+    <section id="portfolio" class="py-24 border-t border-[var(--border-color)] bg-[var(--bg-card)]/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-[var(--accent)] uppercase">Creative Showcase</span>
+                    <h2 class="text-3xl sm:text-5xl font-bold tracking-tight heading-font mt-2">Selected Works</h2>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap items-center gap-2" id="portfolio-filters">
+                    <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-main)] hover:border-[var(--accent)]">
+                        All
+                    </button>
+                    <button data-filter="photo" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        Photographs
+                    </button>
+                    <button data-filter="video" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        Videography
+                    </button>
+                    <button data-filter="poster" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        Poster Designs
+                    </button>
+                    <button data-filter="uiux" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        UI/UX Designs
+                    </button>
+                    <button data-filter="adanim" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        Ad Animations
+                    </button>
+                    <button data-filter="photoanim" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold glass-card text-[var(--text-muted)] hover:text-[var(--text-main)]">
+                        Photo Animation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]" id="portfolio-grid">
+
+                <!-- 1. Combined Poster Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="poster" onclick="openModal('University Event Poster Campaigns', 'Poster Design', './assets/poster-designs/event-posters.jpg')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/poster-designs/event-posters.jpg" alt="University Event Posters" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ctext x=\'50%25\' y=\'45%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23C5A880\' font-family=\'sans-serif\' font-size=\'22\' font-weight=\'bold\'%3EGENESIS • HARSHATAL%3C/text%3E%3Ctext x=\'50%25\' y=\'58%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23F2F2F2\' font-family=\'sans-serif\' font-size=\'18\' font-weight=\'600\'%3EPARSEC • RANG-E-RAAS%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            Poster Design
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">Event Poster Campaigns</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">Branding & visual artwork for GENESIS, HARSHATAL, PARSEC, and RANG-E-RAAS.</p>
+                    </div>
+                </div>
+
+                <!-- 2. UI/UX Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="uiux" onclick="openModal('Mechanical & CAD Dashboard', 'UI/UX Design', './assets/ui-ux/cad-dashboard.jpg')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/ui-ux/cad-dashboard.jpg" alt="Mechanical Interface UI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23C5A880\' font-family=\'sans-serif\' font-size=\'24\' font-weight=\'bold\'%3E3D CAD %26 Tech UI Concept%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            UI/UX Design
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">3D CAD & Tech UI Concept</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">Figma-based user interface integrating CAD data.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Ad Animation Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="adanim" onclick="openModal('FROOTI Motion AD Commercial', 'Ad Animation', './assets/ad-animations/frooti-ad.mp4')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/ad-animations/frooti-thumb.jpg" alt="FROOTI Product Ad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ccircle cx=\'300\' cy=\'225\' r=\'40\' fill=\'%23C5A880\'/%3E%3Cpolygon points=\'290,205 320,225 290,245\' fill=\'%230B0C10\'/%3E%3Ctext x=\'50%25\' y=\'80%25\' text-anchor=\'middle\' fill=\'%23F2F2F2\' font-family=\'sans-serif\' font-size=\'18\'%3EFROOTI AD Animation%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            Ad Animation
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">FROOTI Motion AD Commercial</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">Dynamic motion graphics & product video edit.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Photo Animation Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="photoanim" onclick="openModal('Cinematic Photo Motion Art', 'Photo Animation', './assets/photo-animation/anim1.mp4')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/photo-animation/thumb1.jpg" alt="Photo Animation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23C5A880\' font-family=\'sans-serif\' font-size=\'24\' font-weight=\'bold\'%3EAnimated Stills %26 Visuals%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            Photo Animation
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">Animated Stills & Visuals</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">2D image parallax and ambient motion art.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Photograph Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="photo" onclick="openModal('Architectural & Ambient Photography', 'Photographs', './assets/photographs/photo1.jpg')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/photographs/photo1.jpg" alt="Photograph Shot" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23C5A880\' font-family=\'sans-serif\' font-size=\'24\' font-weight=\'bold\'%3EPhotography Showcase%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            Photographs
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">Architectural & Ambient Lens</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">Lightroom color grading and perspective photography.</p>
+                    </div>
+                </div>
+
+                <!-- 6. Videography Item -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="video" onclick="openModal('Cinematic Event Aftermovie', 'Videography', './assets/videography/video1.jpg')">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                        <img src="./assets/videography/video1.jpg" alt="Videography Shot" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'450\' viewBox=\'0 0 600 450\'%3E%3Crect width=\'600\' height=\'450\' fill=\'%231F2833\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23C5A880\' font-family=\'sans-serif\' font-size=\'24\' font-weight=\'bold\'%3EVideography Coverage%3C/text%3E%3C/svg%3E';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                            Videography
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold group-hover:text-[var(--accent)] transition-colors heading-font">Cinematic Campus & Event Reels</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-1">High-tempo event videography and video editing.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         8. Contact & Socials Section
+         ========================================================================= -->
+    <section id="contact" class="py-24 border-t border-[var(--border-color)] relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Contact Info (Left) -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-bold tracking-widest text-[var(--accent)] uppercase">Initiate Collaboration</span>
+                    <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight heading-font">Let's Create Together.</h2>
+                    <p class="text-base text-[var(--text-muted)] leading-relaxed max-w-md">
+                        Whether you have a creative project, UI/UX task, media production, or strategic inquiry, feel free to reach out.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <!-- Email Link -->
+                        <a href="mailto:puttichiruhas@gmail.com" class="flex items-center gap-4 p-4 rounded-xl glass-card glass-gloss hover:border-[var(--accent)] transition-colors group">
+                            <div class="w-11 h-11 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--accent)]/30 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-canvas)] transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-xs text-[var(--text-muted)] block">Email Direct</span>
+                                <span class="text-base font-semibold group-hover:text-[var(--accent)] transition-colors">puttichiruhas@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <!-- Phone Link -->
+                        <a href="tel:+919030809709" class="flex items-center gap-4 p-4 rounded-xl glass-card glass-gloss hover:border-[var(--accent)] transition-colors group">
+                            <div class="w-11 h-11 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--accent)]/30 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-canvas)] transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-xs text-[var(--text-muted)] block">Call / Phone</span>
+                                <span class="text-base font-semibold group-hover:text-[var(--accent)] transition-colors">+91 9030809709</span>
+                            </div>
+                        </a>
+
+                        <!-- WhatsApp Link -->
+                        <a href="https://wa.me/919030809709" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl glass-card glass-gloss hover:border-[var(--accent)] transition-colors group">
+                            <div class="w-11 h-11 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--accent)]/30 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-canvas)] transition-all">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="text-xs text-[var(--text-muted)] block">Instant Message</span>
+                                <span class="text-base font-semibold group-hover:text-[var(--accent)] transition-colors">Send a Message</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Cards & Copyright (Right) -->
+                <div class="lg:col-span-6">
+                    <div class="glass-card p-8 rounded-3xl glow-effect glass-gloss space-y-6">
+                        <h3 class="text-xl font-bold heading-font">Connect via Social Channels</h3>
+                        <p class="text-sm text-[var(--text-muted)]">Follow my updates on design, photography, and technical media strategy.</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <!-- Instagram Badge -->
+                            <a href="https://instagram.com/mr__c_h_i_r_u" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-canvas)]/90 border border-[var(--border-color)] hover:border-[var(--accent)] transition-all group">
+                                <div class="w-11 h-11 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--accent)]/30 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-canvas)] transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-[var(--text-muted)] block">Instagram</span>
+                                    <span class="text-sm font-bold text-[var(--text-main)] group-hover:text-[var(--accent)]">@mr__c_h_i_r_u</span>
+                                </div>
+                            </a>
+
+                            <!-- LinkedIn Badge -->
+                            <a href="https://linkedin.com/in/PChiruhas" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-canvas)]/90 border border-[var(--border-color)] hover:border-[var(--accent)] transition-all group">
+                                <div class="w-11 h-11 rounded-xl bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center shrink-0 border border-[var(--accent)]/30 group-hover:bg-[var(--accent)] group-hover:text-[var(--bg-canvas)] transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-[var(--text-muted)] block">LinkedIn</span>
+                                    <span class="text-sm font-bold text-[var(--text-main)] group-hover:text-[var(--accent)]">@P Chiruhas</span>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Footer Legal / Copyright -->
+                        <div class="pt-6 border-t border-[var(--border-color)] text-xs text-[var(--text-muted)] flex items-center justify-between">
+                            <span>IIT Dharwad Campus</span>
+                            <span>&copy; <span id="year"></span> Putti Chiruhas</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         9. Lightbox Modal Preview
+         ========================================================================= -->
+    <div id="portfolio-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-6" onclick="closeModal()">
+        <div class="glass-card max-w-3xl w-full rounded-2xl overflow-hidden p-6 relative" onclick="event.stopPropagation()">
+            <!-- Close Modal Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 p-2 rounded-full bg-[var(--bg-canvas)] text-[var(--text-main)] hover:text-[var(--accent)]" aria-label="Close Lightbox">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-content" class="space-y-4">
+                <div class="aspect-video bg-[var(--bg-canvas)] rounded-xl overflow-hidden flex items-center justify-center border border-[var(--border-color)]" id="modal-media-container">
+                    <!-- Dynamic Media (Image or Video) populated by js/main.js -->
+                </div>
+                <div>
+                    <span id="modal-category" class="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Category</span>
+                    <h3 id="modal-title" class="text-xl font-bold heading-font mt-1">Title</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         10. Modular Application Script
+         ========================================================================= -->
+    <script src="js/main.js"></script>
+</body>
+</html>

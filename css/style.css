@@ -1,0 +1,207 @@
+/* ==========================================================================
+   PUTTI CHIRUHAS - PORTFOLIO DESIGN SYSTEM & STYLES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Theme Palettes
+   -------------------------------------------------------------------------- */
+:root {
+    /* Dark Mode Defaults (User-specified palette) */
+    --bg-canvas: #0B0C10;     /* Rich Black */
+    --bg-card: #1F2833;       /* Gunmetal */
+    --bg-card-hover: #293545; 
+    --accent: #C5A880;        /* Champagne Accent */
+    --accent-rgb: 197, 168, 128;
+    --text-main: #F2F2F2;     /* Soft White */
+    --text-muted: #9FA8B3;
+    --border-color: rgba(197, 168, 128, 0.2);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --glow-color: rgba(197, 168, 128, 0.25);
+    --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+[data-theme="light"] {
+    /* Inverted Light Mode */
+    --bg-canvas: #F4F5F8;
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F0F3F7;
+    --accent: #9E7B4F;
+    --accent-rgb: 158, 123, 79;
+    --text-main: #0B0C10;
+    --text-muted: #556070;
+    --border-color: rgba(11, 12, 16, 0.12);
+    --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    --glow-color: rgba(158, 123, 79, 0.15);
+    --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base & Typography
+   -------------------------------------------------------------------------- */
+body {
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+.heading-font {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Gradient Text Effect */
+.accent-gradient-text {
+    background: linear-gradient(135deg, var(--text-main) 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   3. Interactive Cursor Follower
+   -------------------------------------------------------------------------- */
+.cursor-dot,
+.cursor-outline {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    transition: opacity 0.3s ease-in-out, transform 0.15s ease-out;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+}
+
+.cursor-outline {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--accent);
+    opacity: 0.6;
+}
+
+/* Disable custom cursor on touch/mobile devices */
+@media (pointer: coarse) {
+    .cursor-dot, 
+    .cursor-outline {
+        display: none !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. Glassmorphism & Cards
+   -------------------------------------------------------------------------- */
+.glass-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px) saturate(180%);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: var(--glass-sheen);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.glass-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px -10px var(--glow-color), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-4px);
+}
+
+/* Extra Gloss Sheen Badge / Container */
+.glass-gloss {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   5. Glow Effects
+   -------------------------------------------------------------------------- */
+.glow-effect {
+    position: relative;
+}
+
+.glow-effect::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, var(--accent), transparent 60%);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.glow-effect:hover::before {
+    opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. Portfolio Filters & Transitions
+   -------------------------------------------------------------------------- */
+.filter-btn {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: var(--accent);
+    color: var(--bg-canvas) !important;
+    font-weight: 700;
+    box-shadow: 0 4px 20px var(--glow-color), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.portfolio-item {
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-item.hidden-item {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Custom Scrollbars
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-card);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
