@@ -91,6 +91,9 @@ const portfolioData = [
     { src: './assets/videography/VID-20260628-WA0013.mp4',          title: 'Event Aftermovie II',              category: 'video', label: 'Videography' },
     { src: './assets/videography/VID-20260628-WA0017.mp4',          title: 'Event Aftermovie III',             category: 'video', label: 'Videography' },
     { src: './assets/videography/VID_20260111_202214_512.mp4',      title: 'Campus Cinematic Reel',            category: 'video', label: 'Videography' },
+
+    // ── Ad Animation (External Link) ────────────────────────────────────
+    { src: 'ad-animation', title: 'FROOTI Motion AD Commercial', category: 'video', label: 'Ad Animation', isExternal: true, link: 'https://drive.google.com/file/d/1I46EN24tXHI94izMFYDnJBUCgb80ypTV/view' }
 ];
 
 
@@ -229,6 +232,7 @@ function initMobileMenu() {
  * Videos get a static SVG placeholder instead.
  */
 function getThumbPath(src) {
+    if (src === 'ad-animation') return null; // handled separately
     if (src.endsWith('.mp4')) return null; // videos handled separately
     // e.g. ./assets/photographs/IMG_123.jpg  →  ./assets/thumbs/photographs/IMG_123.jpg
     // e.g. ./assets/ui-ux/1.png             →  ./assets/thumbs/ui-ux/1.jpg
@@ -249,23 +253,41 @@ function renderPortfolioGrid() {
 
     grid.innerHTML = portfolioData.map((item, idx) => {
         const isVideo = item.src.endsWith('.mp4');
+        const isExternal = item.isExternal === true;
         const escapedTitle = item.title.replace(/'/g, "\\'").replace(/&/g, '&amp;');
-        const thumbSrc = getThumbPath(item.src);
+        const thumbSrc = isExternal ? null : getThumbPath(item.src);
 
-        // For video thumbnails, use a stylish SVG poster (no video download!)
-        const mediaHtml = isVideo
-            ? `<div class="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] flex items-center justify-center">
+        let mediaHtml = '';
+        
+        if (isExternal) {
+            mediaHtml = `<div class="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] flex items-center justify-center">
+                   <div class="text-center">
+                       <div class="w-16 h-16 rounded-full bg-[var(--accent)]/20 backdrop-blur-sm flex items-center justify-center border border-[var(--accent)]/40 mx-auto mb-3">
+                           <svg class="w-7 h-7 text-[var(--accent)] ml-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                       </div>
+                       <span class="text-xs text-[var(--text-muted)] font-medium">Open in Google Drive</span>
+                   </div>
+               </div>`;
+        } else if (isVideo) {
+            // For video thumbnails, use a stylish SVG poster (no video download!)
+            mediaHtml = `<div class="w-full h-full bg-gradient-to-br from-[#1a1a2e] to-[#16213e] flex items-center justify-center">
                    <div class="text-center">
                        <div class="w-16 h-16 rounded-full bg-[var(--accent)]/20 backdrop-blur-sm flex items-center justify-center border border-[var(--accent)]/40 mx-auto mb-3">
                            <svg class="w-7 h-7 text-[var(--accent)] ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
                        </div>
                        <span class="text-xs text-[var(--text-muted)] font-medium">Click to Play</span>
                    </div>
-               </div>`
-            : `<img src="${thumbSrc}" alt="${item.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
+               </div>`;
+        } else {
+            mediaHtml = `<img src="${thumbSrc}" alt="${item.title}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
+        }
+
+        const onClickAction = isExternal 
+            ? `window.open('${item.link}', '_blank')`
+            : `openModal('${escapedTitle}', '${item.label}', '${item.src}')`;
 
         return `
-            <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="${item.category}" onclick="openModal('${escapedTitle}', '${item.label}', '${item.src}')">
+            <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="${item.category}" onclick="${onClickAction}">
                 <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
                     ${mediaHtml}
                     <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
@@ -354,7 +376,14 @@ window.openModal = function(title, category, mediaPath) {
         const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'><rect width='600' height='400' fill='%231F2833'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%23C5A880' font-family='sans-serif' font-size='20' font-weight='bold'>${encodeURIComponent(title)}</text></svg>`;
         
         modalMediaContainer.innerHTML = `
-            <img src="${mediaPath}" alt="${title}" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='${fallbackSvg}';">
+            <img src="${mediaPath}" alt="${title}" 
+                 class="w-full h-full object-contain cursor-zoom-in hover:scale-[1.02] transition-transform duration-300" 
+                 title="Click to view full screen"
+                 onclick="if(document.fullscreenElement) document.exitFullscreen(); else this.requestFullscreen();"
+                 onerror="this.onerror=null; this.src='${fallbackSvg}';">
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm font-medium pointer-events-none backdrop-blur-md opacity-70">
+                Click image for Full Screen
+            </div>
         `;
     }
 
