@@ -2,15 +2,109 @@
  * Putti Chiruhas - Portfolio Main JavaScript
  * Handles interactive cursor, theme switching, mobile drawer navigation,
  * portfolio filtering, and media lightbox modal.
+ *
+ * All portfolio items are dynamically generated from the portfolioData array.
  */
 
+/* =========================================================================
+   PORTFOLIO ASSET DATA
+   Each item: { src, title, category, label }
+   category values: photo, poster, uiux, video, photoanim
+   ========================================================================= */
+const portfolioData = [
+    // ── Photographs (46 items) ──────────────────────────────────────────
+    { src: './assets/photographs/20241031_210318.jpg',              title: 'Night Ambience',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/20250205_163657.jpg',              title: 'Golden Hour Portrait',             category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/20260104_151358.jpg',              title: 'Campus Architecture',              category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/20260202_122254(1)(1) (2).jpg',    title: 'Urban Perspective',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/20260414_061056.jpg',              title: 'Morning Light',                    category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/20260517_134806(1).jpg',           title: 'Afternoon Shadows',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG20241130175030.jpg',            title: 'Sunset Silhouette',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG20241231180613 (1).jpg',        title: 'New Year Eve',                     category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG20250916193432.jpg',            title: 'Campus Evening Walk',              category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20240718_164716.jpg',          title: 'Monsoon Vibes I',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20240718_164744.jpg',          title: 'Monsoon Vibes II',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20240902_192348.jpg',          title: 'Twilight Frame',                   category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20240929_181635.jpg',          title: 'Dusk Palette',                     category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20241004_183308.jpg',          title: 'Ambient Light Study',              category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20241019_172055.jpg',          title: 'Street Perspective',               category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20241029_004946.jpg',          title: 'Late Night Capture',               category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20250131_184441.jpg',          title: 'Winter Evening I',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20250131_184540 (1).jpg',      title: 'Winter Evening II',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20250908_013249.jpg',          title: 'Midnight Composition',             category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251001_210452.jpg',          title: 'October Mood',                     category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251002_184218.jpg',          title: 'Warm Tones',                       category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251021_093311.jpg',          title: 'Morning Campus I',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251021_093510.jpg',          title: 'Morning Campus II',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251021_093814.jpg',          title: 'Morning Campus III',               category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251021_094350.jpg',          title: 'Morning Campus IV',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_081659.jpg',          title: 'December Dawn I',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_082107.jpg',          title: 'December Dawn II',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_082413.jpg',          title: 'December Dawn III',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_082656.jpg',          title: 'December Dawn IV',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_082805.jpg',          title: 'December Dawn V',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251201_083604.jpg',          title: 'December Dawn VI',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20251226_232406.jpg',          title: 'Christmas Night',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260115_211001.jpg',          title: 'January Night Shot',               category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260116_182627.jpg',          title: 'Evening Blues',                    category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260123_235447.jpg',          title: 'Late Night Atmosphere',            category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260127_220647.jpg',          title: 'Night Walk I',                     category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260127_221449.jpg',          title: 'Night Walk II',                    category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260202_221208.jpg',          title: 'February Night',                   category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260216_185424.jpg',          title: 'Valentine Haze I',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260216_190344.jpg',          title: 'Valentine Haze II',                category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260306_105323.jpg',          title: 'Spring Morning',                   category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/IMG_20260321_215821.jpg',          title: 'Equinox Evening',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/Snapchat-1767697410(1).jpg',      title: 'Candid Moment I',                  category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/Snapchat-337881673.jpg',           title: 'Candid Moment II',                 category: 'photo', label: 'Photographs' },
+    { src: './assets/photographs/Street_489_PL_2.jpg',              title: 'Street Photography',               category: 'photo', label: 'Photographs' },
+
+    // ── Poster Designs (13 items) ───────────────────────────────────────
+    { src: './assets/poster-designs/GENESIS.jpg',                                                               title: 'GENESIS Event Poster',             category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/RHAPSODY Presents.jpg',                                                     title: 'RHAPSODY Presents',                category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/Xperienxe+.jpg',                                                            title: 'Xperience+ Poster',                category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/13 SEP, 2025 IIT DH.jpg',                                                   title: 'IIT DH Event – 13 Sep',            category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/13 SEPTEMBER, 2025. 07 PM until Late.jpg',                                   title: 'September Night Event',            category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/13th sep, 2025 - at 1900.jpg',                                               title: '13th Sep at 1900',                 category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/13th SEPTEMBER.jpg',                                                         title: '13th September Poster',            category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/9 p.m..jpg',                                                                 title: '9 PM Event Flyer',                 category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/At 9.00 pm.jpg',                                                             title: 'At 9 PM – Invite',                 category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/Weekly Event.jpg',                                                           title: 'Weekly Event Series',              category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/Olivia Wilson on May 2026.jpg',                                              title: 'Olivia Wilson – May 2026',         category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/Beige and Red Bold Illustrative Prom Night Event Flyer.jpg',                 title: 'Prom Night Event Flyer',           category: 'poster', label: 'Poster Design' },
+    { src: './assets/poster-designs/Blue and White Modern Lets Talk Podcast Announcement Instagram Post.jpg',    title: 'Podcast Announcement Post',        category: 'poster', label: 'Poster Design' },
+
+    // ── UI/UX Designs (2 items) ─────────────────────────────────────────
+    { src: './assets/ui-ux/1.png',                                  title: 'UI/UX Design Concept',             category: 'uiux',  label: 'UI/UX Design' },
+    { src: './assets/ui-ux/general media school.png',               title: 'General Media School UI',          category: 'uiux',  label: 'UI/UX Design' },
+
+    // ── Photo Animation (6 items) ───────────────────────────────────────
+    { src: './assets/photo-animation/HiPaint_1789306711914.jpg',    title: 'HiPaint Art I',                    category: 'photoanim', label: 'Photo Animation' },
+    { src: './assets/photo-animation/HiPaint_1789400739037.jpg',    title: 'HiPaint Art II',                   category: 'photoanim', label: 'Photo Animation' },
+    { src: './assets/photo-animation/HiPaint_1789468421943.jpg',    title: 'HiPaint Art III',                  category: 'photoanim', label: 'Photo Animation' },
+    { src: './assets/photo-animation/IMG-20261008-WA0028.jpg',      title: 'Photo Animation Frame I',          category: 'photoanim', label: 'Photo Animation' },
+    { src: './assets/photo-animation/IMG-20261008-WA0029.jpg',      title: 'Photo Animation Frame II',         category: 'photoanim', label: 'Photo Animation' },
+    { src: './assets/photo-animation/IMG_20260915_151230.jpg',       title: 'Cinematic Still Motion',           category: 'photoanim', label: 'Photo Animation' },
+
+    // ── Videography (4 items) ───────────────────────────────────────────
+    { src: './assets/videography/VID-20260628-WA0011.mp4',          title: 'Event Aftermovie I',               category: 'video', label: 'Videography' },
+    { src: './assets/videography/VID-20260628-WA0013.mp4',          title: 'Event Aftermovie II',              category: 'video', label: 'Videography' },
+    { src: './assets/videography/VID-20260628-WA0017.mp4',          title: 'Event Aftermovie III',             category: 'video', label: 'Videography' },
+    { src: './assets/videography/VID_20260111_202214_512.mp4',      title: 'Campus Cinematic Reel',            category: 'video', label: 'Videography' },
+];
+
+
+/* =========================================================================
+   APP INITIALIZATION
+   ========================================================================= */
 document.addEventListener('DOMContentLoaded', () => {
     initCurrentYear();
     initIcons();
     initTheme();
     initCursor();
     initMobileMenu();
-    initPortfolioFilter();
+    renderPortfolioGrid();   // render all cards first
+    initPortfolioFilter();   // then attach filter listeners
     initModal();
 });
 
@@ -124,14 +218,58 @@ function initMobileMenu() {
     });
 }
 
+
+/* =========================================================================
+   6. DYNAMIC PORTFOLIO GRID RENDERER
+   ========================================================================= */
+
 /**
- * 6. Portfolio Category Filtering
+ * Renders every asset in portfolioData as a card inside #portfolio-grid.
+ * Videos get a play-button overlay; images use lazy loading.
  */
+function renderPortfolioGrid() {
+    const grid = document.getElementById('portfolio-grid');
+    if (!grid) return;
+
+    grid.innerHTML = portfolioData.map((item, idx) => {
+        const isVideo = item.src.endsWith('.mp4');
+        const escapedTitle = item.title.replace(/'/g, "\\'").replace(/&/g, '&amp;');
+
+        // For video thumbnails, we'll use a play-icon SVG overlay
+        const mediaHtml = isVideo
+            ? `<video src="${item.src}" muted preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>
+               <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                   <div class="w-14 h-14 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                       <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"></polygon></svg>
+                   </div>
+               </div>`
+            : `<img src="${item.src}" alt="${item.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`;
+
+        return `
+            <div class="portfolio-item glass-card rounded-2xl overflow-hidden group cursor-pointer" data-category="${item.category}" onclick="openModal('${escapedTitle}', '${item.label}', '${item.src}')">
+                <div class="relative aspect-[4/3] overflow-hidden bg-[var(--bg-canvas)]">
+                    ${mediaHtml}
+                    <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] via-transparent to-transparent opacity-60"></div>
+                    <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-canvas)]/80 text-[var(--accent)] text-xs font-bold backdrop-blur-md">
+                        ${item.label}
+                    </span>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold group-hover:text-[var(--accent)] transition-colors heading-font">${item.title}</h3>
+                </div>
+            </div>`;
+    }).join('');
+}
+
+
+/* =========================================================================
+   7. PORTFOLIO CATEGORY FILTERING
+   ========================================================================= */
 function initPortfolioFilter() {
     const filterBtns = document.querySelectorAll('#portfolio-filters .filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const getItems = () => document.querySelectorAll('.portfolio-item');
 
-    if (!filterBtns.length || !portfolioItems.length) return;
+    if (!filterBtns.length) return;
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -141,7 +279,7 @@ function initPortfolioFilter() {
 
             const filterValue = btn.getAttribute('data-filter');
 
-            portfolioItems.forEach(item => {
+            getItems().forEach(item => {
                 const itemCategory = item.getAttribute('data-category');
                 if (filterValue === 'all' || itemCategory === filterValue) {
                     item.classList.remove('hidden-item');
@@ -153,9 +291,10 @@ function initPortfolioFilter() {
     });
 }
 
-/**
- * 7. Lightbox Media Modal
- */
+
+/* =========================================================================
+   8. LIGHTBOX MEDIA MODAL
+   ========================================================================= */
 let modal, modalTitle, modalCategory, modalMediaContainer;
 
 function initModal() {
